@@ -1,0 +1,288 @@
+{
+  "360e497186": {
+    "category": "device_discount",
+    "eligible_line_types": [
+      "New Line"
+    ],
+    "rateplan_months": 36,
+    "trade_in_value_type": "Base",
+    "amounts": [
+      {
+        "value": "$660.36",
+        "variant": "256GB",
+        "kind": "device_discount",
+        "is_monthly": false
+      },
+      {
+        "value": "$644.36",
+        "variant": "512GB",
+        "kind": "device_discount",
+        "is_monthly": false
+      },
+      {
+        "value": "$628.36",
+        "variant": "1TB",
+        "kind": "device_discount",
+        "is_monthly": false
+      },
+      {
+        "value": "$812.36",
+        "variant": "2TB",
+        "kind": "device_discount",
+        "is_monthly": false
+      },
+      {
+        "value": "$5.56",
+        "variant": null,
+        "kind": "service_line_credit",
+        "is_monthly": true
+      }
+    ],
+    "cleaned_text": "New customers activating a new line can receive bill credits on the iPhone 17 Pro Max plus an additional $5.56/mo. bill credit over 36 months."
+  },
+  "ceafcbf1b4": {
+    "category": "device_discount",
+    "eligible_line_types": [
+      "New Line"
+    ],
+    "rateplan_months": 36,
+    "trade_in_value_type": null,
+    "amounts": [
+      {
+        "value": "$200",
+        "variant": null,
+        "kind": "service_line_credit",
+        "is_monthly": false
+      },
+      {
+        "value": "$5.56/mo.",
+        "variant": null,
+        "kind": "service_line_credit",
+        "is_monthly": true
+      }
+    ],
+    "cleaned_text": "Get the iPhone 17 Pro Max 256GB with a new line on a 36-month installment plan with no trade-in required and receive an additional $200 in bill credits."
+  },
+  "17a22dbf6c": {
+    "category": "switcher",
+    "eligible_line_types": [
+      "New Line"
+    ],
+    "rateplan_months": 36,
+    "trade_in_value_type": null,
+    "amounts": [
+      {
+        "value": "$800",
+        "variant": null,
+        "kind": "switcher",
+        "is_monthly": false
+      }
+    ],
+    "cleaned_text": "Get up to an $800 AT&T Visa Reward card when you switch to AT&T and port in a new line with eligible postpaid service."
+  },
+  "e6c0b8cc2a": {
+    "category": "finance",
+    "eligible_line_types": [
+      "New Line",
+      "Upgrade"
+    ],
+    "rateplan_months": null,
+    "trade_in_value_type": null,
+    "amounts": [
+      {
+        "value": "$200",
+        "variant": null,
+        "kind": "finance_one_time",
+        "is_monthly": false
+      },
+      {
+        "value": "$240",
+        "variant": null,
+        "kind": "finance_recurring",
+        "is_monthly": false
+      },
+      {
+        "value": "$20",
+        "variant": null,
+        "kind": "finance_recurring",
+        "is_monthly": false
+      },
+      {
+        "value": "$10",
+        "variant": null,
+        "kind": "finance_bill_discount",
+        "is_monthly": true
+      }
+    ],
+    "cleaned_text": "The AT&T Points Plus Card offers a $200 welcome bonus statement credit, up to $240 in annual statement credits, and a $10 monthly bill discount."
+  },
+  "2662442544": {
+    "category": "device_discount",
+    "eligible_line_types": [
+      "New Line"
+    ],
+    "rateplan_months": 36,
+    "trade_in_value_type": "Base",
+    "amounts": [
+      {
+        "value": "$740.36",
+        "variant": "256GB",
+        "kind": "device_discount",
+        "is_monthly": false
+      },
+      {
+        "value": "$724.36",
+        "variant": "512GB",
+        "kind": "device_discount",
+        "is_monthly": false
+      },
+      {
+        "value": "$708.36",
+        "variant": "1TB",
+        "kind": "device_discount",
+        "is_monthly": false
+      },
+      {
+        "value": "$5.56",
+        "variant": null,
+        "kind": "service_line_credit",
+        "is_monthly": true
+      }
+    ],
+    "cleaned_text": "New customers activating a new line can receive up to $740.36 in device bill credits plus an additional $5.56/mo. service credit over 36 months on iPhone 17 Pro."
+  },
+  "6558fc12ce": {
+    "category": "device_discount",
+    "eligible_line_types": [
+      "New Line"
+    ],
+    "rateplan_months": 36,
+    "trade_in_value_type": null,
+    "amounts": [
+      {
+        "value": "$200",
+        "variant": null,
+        "kind": "service_line_credit",
+        "is_monthly": false
+      },
+      {
+        "value": "$5.56",
+        "variant": null,
+        "kind": "service_line_credit",
+        "is_monthly": true
+      }
+    ],
+    "cleaned_text": "Get the iPhone 17 Pro 256GB when adding a new line on an eligible plan with an additional $200 in bill credits over 36 months."
+  },
+  "c19d8d2879": {
+    "category": "trade_in",
+    "eligible_line_types": [
+      "New Line",
+      "Upgrade"
+    ],
+    "rateplan_months": 36,
+    "trade_in_value_type": "Enhanced",
+    "amounts": [
+      {
+        "value": "$930",
+        "variant": null,
+        "kind": "trade_in_max",
+        "is_monthly": false
+      }
+    ],
+    "cleaned_text": "Get iPhone 17 for up to $930 off with eligible trade-in and eligible plan via 36 monthly bill credits."
+  },
+  "1521992849": {
+    "category": "service_line",
+    "eligible_line_types": [
+      "New Line"
+    ],
+    "rateplan_months": 36,
+    "trade_in_value_type": null,
+    "amounts": [
+      {
+        "value": "$200",
+        "variant": null,
+        "kind": "service_line_credit",
+        "is_monthly": false
+      },
+      {
+        "value": "$5.56",
+        "variant": null,
+        "kind": "service_line_credit",
+        "is_monthly": true
+      }
+    ],
+    "cleaned_text": "Get up to $200 off a new line via 36 monthly bill credits when ordering online."
+  },
+  "962ff59b0d": {
+    "category": "device_discount",
+    "eligible_line_types": [
+      "New Line"
+    ],
+    "rateplan_months": 36,
+    "trade_in_value_type": "Base",
+    "amounts": [
+      {
+        "value": "$664.36",
+        "variant": "256GB",
+        "kind": "device_discount",
+        "is_monthly": false
+      },
+      {
+        "value": "$648.36",
+        "variant": "512GB",
+        "kind": "device_discount",
+        "is_monthly": false
+      },
+      {
+        "value": "$5.56",
+        "variant": null,
+        "kind": "service_line_credit",
+        "is_monthly": true
+      }
+    ],
+    "cleaned_text": "New customers activating a new line can get up to $664.36 off the iPhone 17e 256GB or $648.36 off the 512GB model via 36 monthly bill credits, plus an additional $5.56/mo. bill credit."
+  },
+  "6f654c6588": {
+    "category": "device_discount",
+    "eligible_line_types": [
+      "New Line"
+    ],
+    "rateplan_months": 36,
+    "trade_in_value_type": null,
+    "amounts": [
+      {
+        "value": "$200",
+        "variant": null,
+        "kind": "service_line_credit",
+        "is_monthly": false
+      },
+      {
+        "value": "$5.56",
+        "variant": null,
+        "kind": "service_line_credit",
+        "is_monthly": true
+      }
+    ],
+    "cleaned_text": "Get the iPhone 17e 256GB for $0 with a new line on an eligible plan with bill credits over 36 months."
+  },
+  "b411cd8f86": {
+    "category": "trade_in",
+    "eligible_line_types": [
+      "New Line",
+      "Upgrade"
+    ],
+    "rateplan_months": 36,
+    "trade_in_value_type": "Enhanced",
+    "amounts": [
+      {
+        "value": "$1,200",
+        "variant": null,
+        "kind": "trade_in_max",
+        "is_monthly": false
+      }
+    ],
+    "cleaned_text": "Get the new iPhone 18 Pro Max for up to $1,200 off via 36 monthly bill credits with an eligible trade-in and eligible plan."
+  }
+}
