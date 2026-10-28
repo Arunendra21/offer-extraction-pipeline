@@ -1,4 +1,4 @@
-# Offer Extraction Pipeline (AT&T iPhone offers → CSV)
+# Offer Extraction Pipeline
 
 Takes the scraped product JSON and creates a CSV with 29 columns.
 Every product gets 2 rows: one for "New Line" and one for "Upgrade".
