@@ -1,0 +1,162 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R 5 0 R 7 0 R] /Count 3 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >> >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 3650 >>
+stream
+BT /F2 18 Tf 48 762 Td (Offer Extraction Pipeline: Solution Overview) Tj ET
+BT /F1 10 Tf 48 738 Td (Turning scraped AT&T iPhone offer data \(JSON\) into a structured 29-column CSV, using an LLM) Tj ET
+BT /F1 10 Tf 48 725 Td (plus plain Python rules.) Tj ET
+BT /F2 13 Tf 48 697 Td (1. The problem I was given) Tj ET
+BT /F1 10 Tf 48 674 Td (I started with a JSON file holding 12 iPhone products. For each one I had the basics, name,) Tj ET
+BT /F1 10 Tf 48 661 Td (brand, storage variant, price, stock and shipment, plus a list of promotional offers written as) Tj ET
+BT /F1 10 Tf 48 648 Td (loose, unstructured text. Bill credits, switcher rewards, trade-in deals and credit card offers) Tj ET
+BT /F1 10 Tf 48 635 Td (were all mixed in there.) Tj ET
+BT /F1 10 Tf 48 610 Td (The output had to be a CSV with 29 fixed columns. And every product had to show up twice:) Tj ET
+BT /F1 10 Tf 60 585 Td (- Row 1: the customer is adding a New Line) Tj ET
+BT /F1 10 Tf 60 566 Td (- Row 2: the customer is doing an Upgrade) Tj ET
+BT /F1 10 Tf 48 541 Td (That second part mattered more than it first looked. The same offer can count for one line type) Tj ET
+BT /F1 10 Tf 48 528 Td (and not the other, so I could not just copy a product's offers into both rows. Each row had to) Tj ET
+BT /F1 10 Tf 48 515 Td (be worked out on its own.) Tj ET
+BT /F2 13 Tf 48 487 Td (2. How I set it up) Tj ET
+BT /F1 10 Tf 48 464 Td (In short, the pipeline runs in six steps:) Tj ET
+BT /F1 10 Tf 48 439 Td (Input.json, then load the data and copy the basic fields straight across \(no LLM\), then gather) Tj ET
+BT /F1 10 Tf 48 426 Td (the offer texts and drop the duplicates, then run the LLM extraction with Gemini \(structured) Tj ET
+BT /F1 10 Tf 48 413 Td (JSON output\), then check that LLM output, then apply the Python rules for line type, variant) Tj ET
+BT /F1 10 Tf 48 400 Td (and column mapping, then write output.csv, 24 rows by 29 columns.) Tj ET
+BT /F1 10 Tf 48 375 Td (I kept the LLM's job deliberately small. It only reads and classifies the offer text. Python) Tj ET
+BT /F1 10 Tf 48 362 Td (decides which value goes into which row and column. I did that on purpose: if something looks) Tj ET
+BT /F1 10 Tf 48 349 Td (wrong in the CSV, I can trace it back to a rule I wrote, rather than guessing what a model was) Tj ET
+BT /F1 10 Tf 48 336 Td (thinking.) Tj ET
+BT /F2 13 Tf 48 308 Td (3. What each step actually does) Tj ET
+BT /F2 11 Tf 48 284 Td (Copying the basic fields) Tj ET
+BT /F1 10 Tf 48 262 Td (Product name, brand, variant, MSRP, plan type, stock and shipment come straight from the JSON) Tj ET
+BT /F1 10 Tf 48 249 Td (keys. No model involved, nothing to interpret.) Tj ET
+BT /F2 11 Tf 48 223 Td (Gathering the offer texts) Tj ET
+BT /F1 10 Tf 48 201 Td (For each offer I joined the title, description, modal text and card legal text into one block) Tj ET
+BT /F1 10 Tf 48 188 Td (of text, and gave each block a short hash ID. The 12 products hold 48 offers in total, but a) Tj ET
+BT /F1 10 Tf 48 175 Td (lot of them repeat. Only 11 of those texts are unique, so I only needed 11 LLM calls. That) Tj ET
+BT /F1 10 Tf 48 162 Td (saved a fair bit of time and quota.) Tj ET
+BT /F2 11 Tf 48 136 Td (Letting Gemini read the offers) Tj ET
+BT /F1 10 Tf 48 114 Td (Each unique text goes to Gemini with a Pydantic schema, so the model has to return valid JSON.) Tj ET
+BT /F1 10 Tf 48 101 Td (I set temperature to 0 to keep the output as steady as possible. For each offer it returns:) Tj ET
+BT /F1 10 Tf 60 76 Td (- category: device discount, service line, trade-in, switcher or finance) Tj ET
+BT /F1 10 Tf 60 57 Td (- eligible line types: New Line, Upgrade, or both) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >> >> >> /Contents 6 0 R >>
+endobj
+6 0 obj
+<< /Length 3803 >>
+stream
+BT /F1 10 Tf 60 770 Td (- all dollar amounts, copied exactly as written in the text) Tj ET
+BT /F1 10 Tf 60 751 Td (- the storage variant each amount belongs to, if the offer has a variant table) Tj ET
+BT /F1 10 Tf 60 732 Td (- whether an amount is monthly) Tj ET
+BT /F1 10 Tf 60 713 Td (- a short one-line description) Tj ET
+BT /F1 10 Tf 48 688 Td (The prompt is strict on one point: use only facts from the text, never calculate or round) Tj ET
+BT /F1 10 Tf 48 675 Td (anything, and return null when something is not stated. I also put one example from the) Tj ET
+BT /F1 10 Tf 48 662 Td (assignment brief in the prompt, as a few-shot example.) Tj ET
+BT /F1 10 Tf 48 637 Td (I saved the results in llm_cache.json. Run the notebook again and it does not call the API for) Tj ET
+BT /F1 10 Tf 48 624 Td (offers it has already done.) Tj ET
+BT /F2 11 Tf 48 598 Td (Checking the LLM output for made-up numbers) Tj ET
+BT /F1 10 Tf 48 576 Td (This was the part I did not want to skip. Every amount the LLM returned gets checked against) Tj ET
+BT /F1 10 Tf 48 563 Td (the original text. If an amount does not appear in the text, it gets dropped. Unknown) Tj ET
+BT /F1 10 Tf 48 550 Td (categories get dropped too. In the final run, all the extracted amounts passed this check,) Tj ET
+BT /F1 10 Tf 48 537 Td (which was reassuring, but the check stays in place either way.) Tj ET
+BT /F2 11 Tf 48 511 Td (Applying the Python rules) Tj ET
+BT /F1 10 Tf 48 489 Td (For each product and each line type, the rules are:) Tj ET
+BT /F1 10 Tf 48 464 Td (Line type check. An offer is used only if the current line type is in its eligible list. The) Tj ET
+BT /F1 10 Tf 48 451 Td ($800 switcher offer, for example, shows up only in New Line rows.) Tj ET
+BT /F1 10 Tf 48 426 Td (Variant check. Device discounts are taken only for the matching storage variant. The 1 TB model) Tj ET
+BT /F1 10 Tf 48 413 Td (gets $628.36, not the 256 GB amount of $660.36. Before comparing, I normalise "256 GB" and) Tj ET
+BT /F1 10 Tf 48 400 Td ("256GB" so a spacing difference does not break the match.) Tj ET
+BT /F1 10 Tf 48 375 Td (No double counting. Each amount goes into only one column. A monthly amount, for example) Tj ET
+BT /F1 10 Tf 48 362 Td ($5.56/mo., is not used when the total of $200 is available.) Tj ET
+BT /F1 10 Tf 48 337 Td (Finance offer. For a New Line it is the welcome bonus plus the yearly statement credit plus the) Tj ET
+BT /F1 10 Tf 48 324 Td (bill discount: $200 + $240 + $10 = $450. For an Upgrade it is only the recurring parts: $240 +) Tj ET
+BT /F1 10 Tf 48 311 Td ($10 = $250. I did not add the $20 per billing cycle credit again, because it is already part of) Tj ET
+BT /F1 10 Tf 48 298 Td (the $240 per year.) Tj ET
+BT /F1 10 Tf 48 273 Td (Money is handled with Python Decimal, not float, so the decimals do not get rounded away by) Tj ET
+BT /F1 10 Tf 48 260 Td (binary floating point.) Tj ET
+BT /F2 11 Tf 48 234 Td (Writing the output) Tj ET
+BT /F1 10 Tf 48 212 Td (Before saving, the CSV gets checked: it must have exactly 2 rows per product, and exactly the) Tj ET
+BT /F1 10 Tf 48 199 Td (29 required columns. Missing values are left blank.) Tj ET
+BT /F2 13 Tf 48 171 Td (4. When the API pushed back) Tj ET
+BT /F1 10 Tf 48 148 Td (A few things went wrong while I was building this, and the pipeline had to cope with them:) Tj ET
+BT /F1 10 Tf 60 123 Td (- Server busy \(503\), timeouts and malformed JSON: retried up to 3 times, with longer waits) Tj ET
+BT /F1 10 Tf 60 110 Td (each time, 2s, then 4s, then 8s.) Tj ET
+BT /F1 10 Tf 60 91 Td (- Rate limit per minute \(429\): wait 60 seconds and retry.) Tj ET
+BT /F1 10 Tf 60 72 Td (- Daily quota finished \(429, per day\): retrying will not help there, so the pipeline switches) Tj ET
+BT /F1 10 Tf 60 59 Td (to the next Gemini model in a candidate list.) Tj ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >> >> >> /Contents 8 0 R >>
+endobj
+8 0 obj
+<< /Length 3361 >>
+stream
+BT /F1 10 Tf 60 770 Td (- If an offer still fails, it is saved as empty, and running the loop again retries only the) Tj ET
+BT /F1 10 Tf 60 757 Td (failed offers.) Tj ET
+BT /F1 10 Tf 48 732 Td (Both of the first two problems actually happened during development. The API returned 503) Tj ET
+BT /F1 10 Tf 48 719 Td (several times, and the daily free quota of the first model ran out. The retry and the model) Tj ET
+BT /F1 10 Tf 48 706 Td (fallback handled both, which is why I left them in rather than treating them as one-off fixes.) Tj ET
+BT /F2 13 Tf 48 678 Td (5. Assumptions I had to make) Tj ET
+BT /F1 10 Tf 48 655 Td (Some of this was not spelled out cleanly in the brief, so I want to be clear about the calls I) Tj ET
+BT /F1 10 Tf 48 642 Td (made:) Tj ET
+BT /F1 10 Tf 60 617 Td (- BASE and MSRP both come from pricing.retail, which the brief describes as "base retail") Tj ET
+BT /F1 10 Tf 60 604 Td (pricing.) Tj ET
+BT /F1 10 Tf 60 585 Td (- MSRP is written without a "$" sign, as shown in the brief's example. Offer amounts are) Tj ET
+BT /F1 10 Tf 60 572 Td (written with "$".) Tj ET
+BT /F1 10 Tf 60 553 Td (- Amounts with a comma, such as "1,200", are rewritten as "1200".) Tj ET
+BT /F1 10 Tf 60 534 Td (- Trade-In Value Type is "Enhanced" for promotional trade-in deals, as returned by the model.) Tj ET
+BT /F1 10 Tf 60 515 Td (- RESELLER LIST PRICE, PWP/GWP offers, subscription bundle offers and additional offers are) Tj ET
+BT /F1 10 Tf 60 502 Td (left blank, because they are not clearly defined in the brief or they are not present in the) Tj ET
+BT /F1 10 Tf 60 489 Td (data.) Tj ET
+BT /F2 13 Tf 48 461 Td (6. The result) Tj ET
+BT /F1 10 Tf 48 438 Td (The final file has 24 rows \(12 products times 2 line types\) and 29 columns.) Tj ET
+BT /F1 10 Tf 48 413 Td (I checked it against the iPhone 17 Pro Max 256 GB example from the brief: unique discount) Tj ET
+BT /F1 10 Tf 48 400 Td ($660.36, service line $200, switcher $800, no trade-in value, and finance $450 for a New Line) Tj ET
+BT /F1 10 Tf 48 387 Td (and $250 for an Upgrade. Upgrade rows are blank where the brief expects null.) Tj ET
+BT /F2 13 Tf 48 359 Td (7. How to run it) Tj ET
+BT /F1 10 Tf 60 336 Td (1. Open offer_extraction_pipeline.ipynb in Google Colab.) Tj ET
+BT /F1 10 Tf 60 317 Td (2. Add a Gemini API key in Colab Secrets \(the key icon on the left\) with the name) Tj ET
+BT /F1 10 Tf 60 304 Td (GEMINI_API_KEY, and turn on notebook access.) Tj ET
+BT /F1 10 Tf 60 285 Td (3. Upload Input.json and example.json using the Files panel on the left. To skip the API) Tj ET
+BT /F1 10 Tf 60 272 Td (calls, also upload llm_cache.json.) Tj ET
+BT /F1 10 Tf 60 253 Td (4. Click Runtime, then Run all.) Tj ET
+BT /F1 10 Tf 60 234 Td (5. The final file, output.csv, appears in the Files panel and can be downloaded.) Tj ET
+BT /F2 13 Tf 48 206 Td (8. Files in the repository) Tj ET
+BT /F1 10 Tf 60 183 Td (- offer_extraction_pipeline.ipynb: full pipeline) Tj ET
+BT /F1 10 Tf 60 164 Td (- Input.json: input data) Tj ET
+BT /F1 10 Tf 60 145 Td (- example.json: example product from the brief) Tj ET
+BT /F1 10 Tf 60 126 Td (- llm_cache.json: saved LLM results, so the notebook can run without API calls) Tj ET
+BT /F1 10 Tf 60 107 Td (- output.csv: final output) Tj ET
+BT /F1 10 Tf 60 88 Td (- README.md: short summary) Tj ET
+BT /F1 10 Tf 60 69 Td (- solution_overview.pdf: this document) Tj ET
+endstream
+endobj
+xref
+0 9
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000127 00000 n 
+0000000366 00000 n 
+0000004068 00000 n 
+0000004307 00000 n 
+0000008162 00000 n 
+0000008401 00000 n 
+trailer
+<< /Size 9 /Root 1 0 R >>
+startxref
+11814
+%%EOF
